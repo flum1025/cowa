@@ -76,7 +76,7 @@ module Cowa
       rss = locationToRss(location)
       return nil if rss.nil?
       req_url = "http://weather.livedoor.com/forecast/webservice/json/v1?city=#{rss}"
-      return client req_url
+      return JSON.parse(client(req_url), symbolize_names: true)
     end
   end
 end
