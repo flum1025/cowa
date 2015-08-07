@@ -13,12 +13,12 @@ module Cowa
     
     def get_information_place location
       req_url = "http://api.openweathermap.org/data/2.5/weather?q=#{location}"
-      return client req_url
+      return JSON.parse(client(req_url), symbolize_names: true)
     end
     
     def get_information_latlon lat, lon
       req_url = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}"
-      return client req_url
+      return JSON.parse(client(req_url), symbolize_names: true)
     end
   end
 end
