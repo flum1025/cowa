@@ -21,6 +21,7 @@ module Cowa
     
     def locationToRss location
       pref = get_pref location
+      return nil if pref.nil?
       if pref[0][:Name] == "北海道"
         if location == "北海道"
           return self.rss[3][:city][0][:id]
