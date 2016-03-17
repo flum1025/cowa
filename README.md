@@ -2,7 +2,14 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cowa`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+rubyで書かれた天気APIの複合ライブラリです。
+このライブラリはOpenWeatherMapAPIとWeather HacksAPIに対応しています。  
+詳しくは  
+[OpenWeatherMap](http://openweathermap.org/)  
+[Weather Hacks](http://weather.livedoor.com/weather_hacks/)  
+
+質問等ありましたらTwitter:[@flum_](https://twitter.com/flum_)までお願いします。
+
 
 ## Installation
 
@@ -22,7 +29,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+requireしてから
+
+```
+info = Cowa::OpenWeatherMap.new
+puts info.get_information_place("東京")
+```
+の様な感じで使用してください。
+Weather Hacksを使用する場合は内部でYapiライブラリの一部を参照しているためnewするときに引数としてyahooのapi_keyを投げてください。
 
 ## Development
 

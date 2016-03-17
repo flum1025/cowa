@@ -1,4 +1,3 @@
-require "cowa/open_local_platform"
 require 'open-uri'
 require 'json'
 require 'active_support'
