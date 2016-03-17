@@ -1,5 +1,3 @@
 require "cowa/version"
-
-module Cowa
-  # Your code goes here...
-end
+require "cowa/open_weatherMap"
+require "cowa/weather_hacks"
