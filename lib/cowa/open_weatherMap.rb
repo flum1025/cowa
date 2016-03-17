@@ -3,6 +3,12 @@ require 'json'
 
 module Cowa
   class OpenWeatherMap
+    attr_accessor :api_key
+    
+    def initialize(api_key)
+      @api_key = api_key
+    end
+    
     def client url
       return open(URI.encode(url)).read
     end
@@ -12,12 +18,12 @@ module Cowa
     end
     
     def get_information_place location
-      req_url = "http://api.openweathermap.org/data/2.5/weather?q=#{location}"
+      req_url = "http://api.openweathermap.org/data/2.5/weather?q=#{location}&APPID=#{@api_key}"
       return JSON.parse(client(req_url), symbolize_names: true)
     end
     
     def get_information_latlon lat, lon
-      req_url = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}"
+      req_url = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}&APPID=#{@api_key}"
       return JSON.parse(client(req_url), symbolize_names: true)
     end
   end

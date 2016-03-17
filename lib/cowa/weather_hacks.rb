@@ -1,9 +1,8 @@
-path = File.expand_path('../', __FILE__)
-require File.join(path, 'OpenLocalPlatform.rb')
 require 'open-uri'
 require 'json'
 require 'active_support'
 require 'active_support/core_ext'
+require 'yapi'
 
 module Cowa
   class WeatherHacks
