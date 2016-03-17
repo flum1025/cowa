@@ -1,39 +1,39 @@
-Cowa
-===========
+# Cowa
 
-##What is it?
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cowa`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-rubyで書かれた天気APIの複合ライブラリです。
-このライブラリはOpenWeatherMapAPIとWeather HacksAPIに対応しています。  
-詳しくは  
-[OpenWeatherMap](http://openweathermap.org/)  
-[Weather Hacks](http://weather.livedoor.com/weather_hacks/)  
+TODO: Delete this and the text above, and describe your gem
 
-動作確認はubuntu14.04 ruby1.9.3とOS X Yosemite ruby2.0.0です。
+## Installation
 
-##How to Use  
-requireしてから
+Add this line to your application's Gemfile:
 
+```ruby
+gem 'cowa'
 ```
-info = Cowa::OpenWeatherMap.new
-puts info.get_information_place("東京")
-```
-の様な感じで使用してください。
 
+And then execute:
 
+    $ bundle
 
-##Notice
-データがない場合はすべてnilを返します。  
-/cowa/cowa.rbをrequireすることですべてのライブラリを呼び出すことができますが、  
-最小限だけにとどめたい場合は/cowa/cowa/の中から必要なものだけrequireしてください。   
-Weather Hacksを使用する場合は内部でYapiライブラリの一部を参照しているためnewするときに引数としてyahooのapi_keyを投げてください。
-cowa-example.rbは使用例ですので、参考にしてみてください。  
+Or install it yourself as:
 
+    $ gem install cowa
 
-質問等ありましたらTwitter:[@flum_](https://twitter.com/flum_)までお願いします。
+## Usage
 
-##License
+TODO: Write usage instructions here
 
-The MIT License
+## Development
 
--------
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+1. Fork it ( https://github.com/[my-github-username]/cowa/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
