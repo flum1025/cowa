@@ -3,28 +3,33 @@ require 'json'
 
 module Cowa
   class OpenWeatherMap
+    NotFound = Class.new(StandardError)
+
     attr_accessor :api_key
-    
-    def initialize(api_key)
-      @api_key = api_key
+
+    def initialize(open_weathermap_api_key, yahoo_api_key)
+      @contentsgeocoder = Yapi::OpenLocalPlatform::ContentsGeoCoder.new(yahoo_api_key)
+      @api_key = open_weathermap_api_key
     end
-    
+
     def client url
-      return open(URI.encode(url)).read
+      open(URI.encode(url)).read
     end
-    
+
     def get_icon icon
-      return open("http://openweathermap.org/img/w/#{icon}.png")
+      open("http://openweathermap.org/img/w/#{icon}.png")
     end
-    
+
     def get_information_place location
-      req_url = "http://api.openweathermap.org/data/2.5/weather?q=#{location}&APPID=#{@api_key}"
-      return JSON.parse(client(req_url), symbolize_names: true)
+      json = @contentsgeocoder.contentsGeoCoder(location)
+      raise NotFound if json[:YDF][:ResultInfo][:Count] == "0"
+      lon, lat = json[:YDF][:Feature][:Geometry][:Coordinates].split(',')
+      get_information_latlon lat, lon
     end
-    
+
     def get_information_latlon lat, lon
       req_url = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}&APPID=#{@api_key}"
-      return JSON.parse(client(req_url), symbolize_names: true)
+      JSON.parse(client(req_url), symbolize_names: true)
     end
   end
 end
