@@ -1,23 +1,21 @@
 require 'open-uri'
 require 'json'
-require 'active_support'
-require 'active_support/core_ext'
 require 'yapi'
 
 module Cowa
   class WeatherHacks
     attr_accessor :rss
-    
+
     def initialize(api_key)
       @contentsgeocoder = Yapi::OpenLocalPlatform::ContentsGeoCoder.new(api_key)
       self.rss = xml_to_json(open(URI.encode("http://weather.livedoor.com/forecast/rss/primary_area.xml")).read)[:rss][:channel][:source][:pref]
     end
-    
+
     def xml_to_json xml
       doc = Hash.from_xml xml
       return JSON.parse(doc.to_json, symbolize_names: true)
     end
-    
+
     def locationToRss location
       pref = get_pref location
       return nil if pref.nil?
@@ -40,13 +38,13 @@ module Cowa
       id = get_id(city, location)
       return id
     end
-    
+
     def get_pref location
       json = @contentsgeocoder.contentsGeoCoder(location)
       return nil if json[:YDF][:ResultInfo][:Count] == "0"
       return json[:YDF][:Feature][:Property][:AddressElement]
     end
-    
+
     def get_city pref
       self.rss().each do |t|
         if t[:title] == pref
@@ -55,7 +53,7 @@ module Cowa
       end
       return nil
     end
-    
+
     def get_id(city, location)
       unless city.nil?
         city.each do |c|
@@ -66,11 +64,11 @@ module Cowa
         return nil
       end
     end
-    
+
     def client url
       return open(URI.encode(url)).read
     end
-    
+
     def forecast location
       rss = locationToRss(location)
       return nil if rss.nil?
